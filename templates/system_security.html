@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+     <title>System Security</title> 
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">  
+    </head>
+    
+    <body>
+  <div class="container">
+
+    <h1>SYSTEM SECURITY</h1>
+
+    <form action="/scan" method="GET">
+        <button type="submit" class="scan-btn">Start Scan</button>
+    </form>
+
+    <div class="content">
+
+        <div class="left-box">
+
+            <h2>Security Checks</h2>
+
+            <ul>
+                <li>⚙ Running Processes</li>
+                <li>🔓 Open Ports</li>
+                <li>🛡 Firewall Status</li>
+                <li>💻 Installed Software</li>
+                <li>🔑 Weak Password Check</li>
+                <li>🚀 Startup Programs</li>
+            </ul>
+
+        </div>
+
+        <div class="right-box">
+
+            <h2>Scan Result</h2>
+
+            <p><b>⚙️ Running Processes:</b></p>
+
+{% if processes %}
+{% else %}
+<p>--</p>
+{% endif %}
+<ol>
+{% for process in processes %}
+    <li>{{ process }}</li>
+{% endfor %}
+</ol>
+            <p><b>🌐 Open Ports:</b></p>
+
+{% if ports %}
+{% else %}
+<p>No Open Ports Found</p>
+{% endif %}
+<ol>
+{% for port in ports %}
+    <li>{{ port }}</li>
+{% endfor %}
+</ol>
+
+            <p>🛡️ Firewall Status : {{ firewall}}</p>
+            <h3>💻 Installed Software:</h3>
+
+
+<ol>
+{% for app in software %}
+    <li>{{ app }}</li>
+{% endfor %}
+</ol>
+            <p><b></b>🔑 Weak Password : </b> {{password}}</p>
+            <h3>🚀 Startup Programs :</h3>
+
+
+<ol>
+{% for item in startup %}
+    <li>{{ item }}</li>
+{% endfor %}
+</ol>
+
+            <h3>📊 Risk Score : {{ risk }}/100</h3>
+            
+<h3>Risk Level : {{ risk_level }}</h3>
+<h3>💡 Recommendations:</h3>
+
+<ul>
+{% for rec in recommendations %}
+    <li>{{ rec }}</li>
+{% endfor %}
+</ul>
+<h3>Scan Time</h3>
+
+<p>{{ scan_time }}</p>
+
+
+
+        </div>
+
+    </div>
+
+</div>      
+    
+    </body>
+
+</html>
